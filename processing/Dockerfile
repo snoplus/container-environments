@@ -1,4 +1,4 @@
-FROM centos:7.9.2009
+FROM centos:7
 
 LABEL maintainer="Jamie Rajewski <jrajewsk@ualberta.ca>"
 SHELL ["/bin/bash", "-c"]
@@ -8,7 +8,7 @@ WORKDIR /home/snoprod
 # Update base packages
 RUN yum update -y
 # Useful packages and requirements to install python 2.7.18 etc
-RUN yum install -y gcc openssl-devel bzip2-devel wget make less
+RUN yum install -y gcc openssl-devel bzip2-devel wget make less screen
 
 # Install Python 2
 RUN wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
@@ -29,8 +29,7 @@ RUN python3 -m pip install virtualenv
 
 # Install Ganga with a virtual environment
 RUN python2.7 -m virtualenv ganga-7.1.9
-RUN source ganga-7.1.9/bin/activate 
-RUN python -m pip install ganga==7.1.9 && deactivate
+RUN source ganga-7.1.9/bin/activate && python -m pip install ganga==7.1.9 && deactivate
 
 # Install DIRAC client according to docs:
 # https://www.gridpp.ac.uk/wiki/Quick_Guide_to_Dirac#Dirac_client_installation
@@ -40,6 +39,8 @@ RUN wget --no-check-certificate -np -O dirac-install https://raw.githubuserconte
 RUN chmod u+x dirac-install
 RUN ./dirac-install -r v7r1p26
 # The proxy still needs to be started, do so in the container
+
+WORKDIR /home/snoprod
 
 # Clean yum cache
 RUN yum clean all
