@@ -44,3 +44,7 @@ WORKDIR /home/snoprod
 
 # Clean yum cache
 RUN yum clean all
+
+# Create dynamic entrypoint where you can override what script is launched
+#ENTRYPOINT [ "launch_screen.sh" ]
+#CMD ["/home/snoprod/data-flow/cron/launch_processing_screen/launch_processing.sh"]
