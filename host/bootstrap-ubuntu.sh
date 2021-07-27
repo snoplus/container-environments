@@ -7,7 +7,7 @@ sudo apt-get update && sudo apt-get dist-upgrade -y
 sudo apt-get install -y apt-transport-https ca-certificates curl \
     software-properties-common wget git python cgroup-tools golang \
     build-essential uuid-dev libgpgme-dev squashfs-tools libseccomp-dev \
-    pkg-config cryptsetup-bin make emacs
+    pkg-config cryptsetup-bin make emacs voms-clients-java myproxy
 
 #--- Create snoprod user (accessible only via SSH key, no password) ---#
 sudo adduser --disabled-password --gecos "" --home /home/snoprod --shell /bin/bash snoprod
